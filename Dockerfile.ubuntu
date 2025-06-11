@@ -1,0 +1,42 @@
+# Prepare python and pip.
+FROM jupyter/minimal-notebook:x86_64-ubuntu-22.04 AS base
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+USER root
+
+RUN apt update 
+RUN apt install -y build-essential python3-dev
+
+# Upgrade pip.
+RUN pip install --upgrade pip
+
+RUN pip install --no-cache-dir cython
+
+# Install optional jupyter theme.
+RUN pip install --no-cache-dir jupyterlab_darkside_theme
+
+# -----------------------------------------------------------------------------
+FROM base AS base-with-requirements
+
+# Prepare workspace.
+WORKDIR /workspace
+
+# Create virtual environment.
+RUN python3 -m venv .venv
+
+# Switch to the virtual environment.
+ENV PATH="/workspace/.venv/bin:$PATH"
+
+# Install requirements.txt.
+COPY requirements.txt requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+
+# -----------------------------------------------------------------------------
+FROM base-with-requirements AS image
+
+COPY . .
+
+# Start jupyter notebook server entrypoint, without token.
+EXPOSE 8888
+ENTRYPOINT jupyter notebook --NotebookApp.token=''
