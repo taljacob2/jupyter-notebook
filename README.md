@@ -41,3 +41,11 @@ docker run -d -it --name jupyter-notebook -p 8888:8888 -v "$(pwd)/.jupyter:/home
 ```
 
 Once you have run the container, navigate to http://localhost:8888/lab to run a notebook.
+
+
+## Development
+
+### Build & Publish The Image On GitHub Repository
+
+- Push to `master` branch to create `ghcr.io/taljacob2/jupyter-notebook:master`
+- Push a git tag with a semantic tagging of `*.*.*` to create `ghcr.io/taljacob2/jupyter-notebook:*.*.*` and update `ghcr.io/taljacob2/jupyter-notebook:latest`
