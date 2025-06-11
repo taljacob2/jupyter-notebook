@@ -16,8 +16,16 @@ echo "$(python3 -m pip freeze)" > requirements.txt
 
 ### Build The Image Locally
 
+Basic image:
+
 ```sh
 docker build . -t jupyter-notebook
+```
+
+Ubuntu image:
+
+```sh
+docker build -f Dockerfile.ubuntu . -t jupyter-notebook
 ```
 
 ### Run The Jupyter Notebook Server
