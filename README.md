@@ -14,12 +14,6 @@ You can export a `requirements.txt` file by running the following command:
 echo "$(python3 -m pip freeze)" > requirements.txt 
 ```
 
-### Build The Image Locally
-
-```sh
-docker build . -t jupyter-notebook
-```
-
 ### Run The Jupyter Notebook Server
 
 Choose one of the following options:
@@ -29,7 +23,7 @@ Choose one of the following options:
 > ATTENTION: Once the container is removed, the whole changes you have made in the workspace will be removed with it.
 
 ```
-docker run -d -it --name jupyter-notebook -p 8888:8888 -v "$(pwd)/.jupyter:/home/jovyan/.jupyter" jupyter-notebook
+docker run -d -it --name jupyter-notebook -p 8888:8888 -v "$(pwd)/.jupyter:/home/jovyan/.jupyter" ghcr.io/taljacob2/jupyter-notebook
 ```
 
 #### Live edit the workspace with the host machine (RECOMMENDED)
@@ -37,13 +31,19 @@ docker run -d -it --name jupyter-notebook -p 8888:8888 -v "$(pwd)/.jupyter:/home
 > This will also backup the changes you have made in the workspace in the host machine.
 
 ```
-docker run -d -it --name jupyter-notebook -p 8888:8888 -v "$(pwd)/.jupyter:/home/jovyan/.jupyter" -v "$(pwd):/workspace" jupyter-notebook
+docker run -d -it --name jupyter-notebook -p 8888:8888 -v "$(pwd)/.jupyter:/home/jovyan/.jupyter" -v "$(pwd):/workspace" ghcr.io/taljacob2/jupyter-notebook
 ```
 
 Once you have run the container, navigate to http://localhost:8888/lab to run a notebook.
 
 
 ## Development
+
+### Build The Image Locally
+
+```sh
+docker build . -t jupyter-notebook
+```
 
 ### Build & Publish The Image On GitHub Repository
 
