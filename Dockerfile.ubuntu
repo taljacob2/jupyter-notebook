@@ -13,6 +13,9 @@ RUN pip install --upgrade pip
 
 RUN pip install --no-cache-dir cython
 
+# Add autocompletion in jupyter notebooks
+RUN pip install --no-cache-dir jupyter-lsp
+
 # Install optional jupyter themes.
 RUN pip install --no-cache-dir jupyterlab_darkside_theme jupyterlab-night
 
