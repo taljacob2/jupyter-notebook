@@ -4,8 +4,8 @@ FROM jupyter/minimal-notebook AS base
 # Upgrade pip.
 RUN pip install --upgrade pip
 
-# Install optional jupyter theme.
-RUN pip install --no-cache-dir jupyterlab_darkside_theme
+# Install optional jupyter themes.
+RUN pip install --no-cache-dir jupyterlab_darkside_theme jupyterlab-night
 
 # -----------------------------------------------------------------------------
 FROM base AS base-with-requirements
