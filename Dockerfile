@@ -1,5 +1,5 @@
 # Prepare python and pip.
-FROM jupyter/minimal-notebook as base
+FROM jupyter/minimal-notebook AS base
 
 # Upgrade pip.
 RUN pip install --upgrade pip
@@ -8,7 +8,7 @@ RUN pip install --upgrade pip
 RUN pip install jupyterlab_darkside_theme
 
 # -----------------------------------------------------------------------------
-FROM base as base-with-requirements
+FROM base AS base-with-requirements
 
 # Prepare workspace.
 WORKDIR /workspace
@@ -24,7 +24,7 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 # -----------------------------------------------------------------------------
-FROM base-with-requirements as image
+FROM base-with-requirements AS image
 
 COPY . .
 
