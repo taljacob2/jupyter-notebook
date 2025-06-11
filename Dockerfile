@@ -5,7 +5,7 @@ FROM jupyter/minimal-notebook AS base
 RUN pip install --upgrade pip
 
 # Install optional jupyter theme.
-RUN pip install jupyterlab_darkside_theme
+RUN pip install --no-cache-dir jupyterlab_darkside_theme
 
 # -----------------------------------------------------------------------------
 FROM base AS base-with-requirements
@@ -21,7 +21,7 @@ ENV PATH="/workspace/.venv/bin:$PATH"
 
 # Install requirements.txt.
 COPY requirements.txt requirements.txt
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # -----------------------------------------------------------------------------
 FROM base-with-requirements AS image
