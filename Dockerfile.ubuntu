@@ -35,7 +35,7 @@ ENV PATH="/workspace/.venv/bin:$PATH"
 
 # Install requirements.txt.
 COPY requirements.txt requirements.txt
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install --no-cache-dir --ignore-installed -r requirements.txt
 
 # -----------------------------------------------------------------------------
 FROM base-with-requirements AS image
