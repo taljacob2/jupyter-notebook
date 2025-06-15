@@ -56,4 +56,4 @@ COPY . .
 
 # Start jupyter notebook server entrypoint, without token.
 EXPOSE 8888
-ENTRYPOINT jupyter notebook --allow-root --NotebookApp.token=''
+ENTRYPOINT ["jupyter", "notebook", "--allow-root", "--NotebookApp.token="]
