@@ -30,4 +30,4 @@ COPY . .
 
 # Start jupyter notebook server entrypoint, without token.
 EXPOSE 8888
-ENTRYPOINT ["jupyter", "notebook", "--NotebookApp.token="]
+ENTRYPOINT ["jupyter", "notebook", "--allow-root", "--no-browser", "--ip=0.0.0.0", "--port=8888", "--NotebookApp.token="]
