@@ -1,0 +1,57 @@
+# Prepare python and pip.
+FROM ubuntu:jammy AS base
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+USER root
+
+RUN apt update 
+RUN apt install -y build-essential software-properties-common cmake
+# RUN add-apt-repository ppa:deadsnakes/ppa -y
+RUN apt install -y python3.10-full python3.10-dev python3-pip python3.10-venv
+
+# Upgrade pip.
+RUN pip install --upgrade pip
+
+RUN pip install --no-cache-dir cython
+
+# jupyter notebook
+RUN pip install jupyter==1.0.0
+RUN pip install jupyter-console==6.6.3
+RUN pip install jupyter-events==0.10.0
+RUN pip install jupyter-lsp==2.2.5
+RUN pip install jupyter_client==8.6.2
+RUN pip install jupyter_core==5.7.2
+RUN pip install jupyter_server==2.14.1
+RUN pip install jupyter_server_terminals==0.5.3
+RUN pip install jupyterlab==4.2.1
+RUN pip install jupyterlab_pygments==0.3.0
+RUN pip install jupyterlab_server==2.27.2
+RUN pip install jupyterlab_widgets==3.0.11
+
+# Add autocompletion in jupyter notebooks
+RUN pip install --no-cache-dir jupyter-lsp
+
+# Install optional jupyter themes.
+RUN pip install --no-cache-dir jupyterlab_darkside_theme jupyterlab-night
+
+# -----------------------------------------------------------------------------
+FROM base AS base-with-requirements
+
+# Prepare workspace.
+WORKDIR /workspace
+
+# Install requirements.txt.
+COPY requirements.txt requirements.txt
+RUN pip install --no-cache-dir --ignore-installed -r requirements.txt
+
+# -----------------------------------------------------------------------------
+FROM base-with-requirements AS image
+
+COPY . .
+
+# Start jupyter notebook server entrypoint, without token.
+EXPOSE 8888
+EXPOSE 6006
+COPY --chmod=755 entrypoint-ubuntu3.sh /entrypoint.sh
+ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
