@@ -25,7 +25,13 @@ docker build . -t jupyter-notebook
 Ubuntu image:
 
 ```sh
-docker build -f Dockerfile.ubuntu . -t jupyter-notebook
+docker build -f Dockerfile.ubuntu . -t jupyter-notebook:ubuntu
+```
+
+Ubuntu2 image:
+
+```sh
+docker build -f Dockerfile.ubuntu2 . -t jupyter-notebook:ubuntu2
 ```
 
 ### Run The Jupyter Notebook Server
@@ -40,12 +46,36 @@ Choose one of the following options:
 docker run -d -it --name jupyter-notebook -p 8888:8888 -v "$(pwd)/.jupyter:/home/jovyan/.jupyter" jupyter-notebook
 ```
 
+or
+
+```
+docker run -d -it --name jupyter-notebook -p 8888:8888 -v "$(pwd)/.jupyter:/root/.jupyter" jupyter-notebook:ubuntu
+```
+
+or
+
+```
+docker run -d -it --name jupyter-notebook -p 8888:8888 -v "$(pwd)/.jupyter:/root/.jupyter" jupyter-notebook:ubuntu2
+```
+
 #### Live edit the workspace with the host machine (RECOMMENDED)
 
 > This will also backup the changes you have made in the workspace in the host machine.
 
 ```
 docker run -d -it --name jupyter-notebook -p 8888:8888 -v "$(pwd)/.jupyter:/home/jovyan/.jupyter" -v "$(pwd):/workspace" jupyter-notebook
+```
+
+or
+
+```
+docker run -d -it --name jupyter-notebook -p 8888:8888 -v "$(pwd)/.jupyter:/root/.jupyter" -v "$(pwd):/workspace" jupyter-notebook:ubuntu
+```
+
+or
+
+```
+docker run -d -it --name jupyter-notebook -p 8888:8888 -v "$(pwd)/.jupyter:/root/.jupyter" -v "$(pwd):/workspace" jupyter-notebook:ubuntu2
 ```
 
 Once you have run the container, navigate to http://localhost:8888/lab to run a notebook.
