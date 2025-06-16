@@ -34,6 +34,12 @@ Ubuntu2 image:
 docker build -f Dockerfile.ubuntu2 . -t jupyter-notebook:ubuntu2
 ```
 
+Ubuntu3 image:
+
+```sh
+docker build -f Dockerfile.ubuntu3 . -t jupyter-notebook:ubuntu3
+```
+
 ### Run The Jupyter Notebook Server
 
 Choose one of the following options:
@@ -76,6 +82,12 @@ or
 
 ```
 docker run -d -it --name jupyter-notebook -p 8888:8888 -v "$(pwd)/.jupyter:/root/.jupyter" -v "$(pwd):/workspace" jupyter-notebook:ubuntu2
+```
+
+or
+
+```
+docker run -d -it --name jupyter-notebook -p 8888:8888 -p 6006:6006 -v "$(pwd)/.jupyter:/root/.jupyter" -v "$(pwd):/workspace" jupyter-notebook:ubuntu3
 ```
 
 Once you have run the container, navigate to http://localhost:8888/lab to run a notebook.
