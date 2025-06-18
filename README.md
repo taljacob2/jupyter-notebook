@@ -64,6 +64,12 @@ or
 docker run -d -it --name jupyter-notebook -p 8888:8888 -v "$(pwd)/.jupyter:/root/.jupyter" jupyter-notebook:ubuntu2
 ```
 
+or
+
+```
+docker run -d -it --name jupyter-notebook -p 8888:8888 -p 6006:6006 -v "$(pwd)/.jupyter:/root/.jupyter" jupyter-notebook:ubuntu3
+```
+
 #### Live edit the workspace with the host machine (RECOMMENDED)
 
 > This will also backup the changes you have made in the workspace in the host machine.
