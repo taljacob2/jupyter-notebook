@@ -53,5 +53,5 @@ COPY . .
 # Start jupyter notebook server entrypoint, without token.
 EXPOSE 8888
 EXPOSE 6006
-COPY --chmod=755 entrypoint-ubuntu3.sh /entrypoint.sh
+COPY entrypoint-ubuntu3.sh /entrypoint.sh
 ENTRYPOINT ["/bin/bash", "/entrypoint.sh"]
